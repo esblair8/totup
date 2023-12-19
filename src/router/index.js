@@ -54,6 +54,12 @@ const router = createRouter({
       component: () => import('../views/CreateInvoiceView.vue')
     },
     {
+      path: '/v2',
+      name: 'createNewv2',
+      meta: { requiresAuth: true },
+      component: () => import('../views/NewCreateInvoiceView.vue')
+    },
+    {
       path: '/schedule',
       name: 'schedule',
       meta: { requiresAuth: true },

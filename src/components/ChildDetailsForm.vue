@@ -1,8 +1,6 @@
 <template>
     <h2 class="title is-xs">Child Details</h2>
 
-    {{ childDetailsStore }}
-    
     <div class="field">
         <label class="label">Child's Full Name</label>
             <input v-model="childDetailsStore.fullName" class="input" type="text" placeholder="Full Name">

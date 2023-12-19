@@ -1,94 +1,32 @@
 import { defineStore } from 'pinia'
+import  useSupabase  from '@/composables/UseSupabase'
+
+const { supabase } = useSupabase()
 
 const useInvoiceStore = defineStore('invoiceStore', {
   state: () => ({
-     invoiceData: [
-      {
-        id: 1,
-        name: 'Lucca Blair',
-        rate: 6.00,
-        hours: 10.0,
-        total: 60,
-        status: 'draft',
-        period: 'June 23',
-        date: '2021-06-23',
-      },
-      {
-        id: 2,
-        name: 'Cassie Blair',
-        rate: 6,
-        hours: 12,
-        total: 72,
-        status: 'sent',
-        period: 'June 23',
-        date: '2021-06-23',
-      },
-      {
-        id: 3,
-        name: 'Alby Graham',
-        rate: 6,
-        hours: 12,
-        total: 72,
-        status: 'unpaid',
-        period: 'June 23',
-        date: '2021-06-23',
-      },
-      {
-        id: 4,
-        name: 'Connie Graham',
-        rate: 6,
-        hours: 12,
-        total: 72,
-        status: 'paid',
-        period: 'June 23',
-        date: '2021-06-23',
-      },
-      {
-        id: 5,
-        name: 'Lucca Blair',
-        rate: 6,
-        hours: 10,
-        total: 60,
-        status: 'sent',
-        period: 'June 23',
-        date: '2021-06-23',
-      },
-      {
-        id: 6,
-        name: 'Cassie Blair',
-        rate: 6,
-        hours: 12,
-        total: 72,
-        status: 'paid',
-        period: 'June 23',
-        date: '2021-06-23',
-      },
-      {
-        id: 7,
-        name: 'Alby Graham',
-        rate: 6,
-        hours: 12,
-        total: 72,
-        status: 'unpaid',
-        period: 'June 23',
-        date: '2021-06-23',
-      },
-      {
-        id: 8,
-        name: 'Connie Graham',
-        rate: 6,
-        hours: 12,
-        total: 72,
-        status: 'unpaid',
-        period: 'June 23',
-        date: '2021-06-23',
-      }
-    ],
+    invoiceData: [],
     searchName: '',
     selectedStatus: '',
     selectedInvoiceId: null,
+    errorMessage: null,
   }),
   getters: {
+    async fetchInvoices(state) {
+
+      if (this.invoiceData.length > 0) return
+     
+      let { data, error } = await supabase
+      .from('invoices')
+      .select('*')
+    
+      console.log(data)
+      if (error)  {
+        this.errorMessage = error.message
+      } else {
+        this.invoiceData = data
+    }
+    },
     filteredInvoices(state) {
       const searchTerm = state.searchName.toLowerCase().trim()
       const selectedStatusValue = state.selectedStatus.toLowerCase().trim()
