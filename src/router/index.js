@@ -55,7 +55,7 @@ const router = createRouter({
     },
     {
       path: '/new-invoice',
-      name: 'createNewAlias',
+      name: 'createNewInvoice',
       meta: { requiresAuth: true },
       component: () => import('../views/CreateInvoiceView.vue')
     },
