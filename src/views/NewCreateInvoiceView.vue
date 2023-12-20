@@ -48,7 +48,7 @@ const addLineItem = () => {
 }
 
 const removeLineItem = () => {
-  if(lineItems.length > 1) {
+  if(lineItems.value.length > 1) {
     lineItems.value.pop()
   } else {
     alert("You must have at least one line item")
