@@ -23,7 +23,6 @@ const handleLogin = async (provider) => {
     await loginWithSocialProvider(provider)
     isLoading.value = false
   } catch (error) {
-    alert('Evan', error.message)
     isLoading.value = false
   }
 }

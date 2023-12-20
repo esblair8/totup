@@ -49,15 +49,15 @@ const router = createRouter({
     },
     {
       path: '/',
-      name: 'createNew',
+      name: 'invoices-root',
       meta: { requiresAuth: true },
-      component: () => import('../views/CreateInvoiceView.vue')
+      component: () => import('../views/InvoicesView.vue')
     },
     {
-      path: '/v2',
-      name: 'createNewv2',
+      path: '/new-invoice',
+      name: 'createNewAlias',
       meta: { requiresAuth: true },
-      component: () => import('../views/NewCreateInvoiceView.vue')
+      component: () => import('../views/CreateInvoiceView.vue')
     },
     {
       path: '/schedule',
