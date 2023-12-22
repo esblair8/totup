@@ -1,4 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import useAuthUser from '@/composables/UseAuthUser'
+
+const { isLoggedIn } = useAuthUser()
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -36,12 +39,18 @@ const router = createRouter({
       component: () => import('../views/SettingsView.vue')
     },
     {
+      path: '/complete-registration',
+      name: 'complete-registration',
+      component: () => import('../views/CompleteRegistrationView.vue')
+    },
+    {
       path: '/subscription',
       name: 'subscription',
       meta: { requiresAuth: true },
       component: () => import('../views/SubscriptionView.vue')
     },
     {
+     
       path: '/invoices',
       name: 'invoices',
       meta: { requiresAuth: true },
@@ -60,12 +69,6 @@ const router = createRouter({
       component: () => import('../views/CreateInvoiceView.vue')
     },
     {
-      path: '/schedule',
-      name: 'schedule',
-      meta: { requiresAuth: true },
-      component: () => import('../views/ScheduleView.vue')
-    },
-    {
       path: '/contact',
       name: 'contact',
       component: () => import('../views/ContactUsView.vue')
@@ -78,19 +81,15 @@ const router = createRouter({
   ]
 })
 
-// router.beforeEach(async (to) => {
-
-//   const { getUser } = useAuthUser()
-//   const user = await getUser()
-
-//   if (user == null && to.meta.requiresAuth) {
-//     return { name: 'login' }
-//   }
-
-//   if (user && !to.meta.requiresAuth) {
-//     return  { name: 'dashboard' } 
-//   }
-
-// })
+// add route gaurds here to check if user is logged in
+router.beforeEach(async (to, from, next) => {
+  const requiresAuth = to.meta.requiresAuth
+  console.log('requiresAuth', requiresAuth, 'isLoggedIn', isLoggedIn(), 'to', to)
+  if (requiresAuth && !isLoggedIn()) {
+    next('/login')
+  } else {
+    next()
+  } ``
+})
 
 export default router

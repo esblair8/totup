@@ -17,7 +17,7 @@ const handleUpdatePassword = async () => {
     await update(user.email, password.value)
     router.push('/')
   } catch (error) {
-    alert(error.message)
+    //do some error handling
   }
 }
 </script>

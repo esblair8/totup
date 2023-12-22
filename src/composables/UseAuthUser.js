@@ -6,7 +6,8 @@ import { ref, reactive } from "vue"
 const user = reactive({
   fullName: '',
   email: '',
-  password: ''
+  password: '',
+  confirmPassword: '',
 })
 
 const loggedInUser = ref(null)
@@ -66,7 +67,7 @@ export default function useAuthUser() {
   const validateCredentials = (credentials, attemptPasswordValidation) => {
     const { fullName, email, password } = credentials
 
-    if (attemptPasswordValidation && !fullName ) errors.nameError = 'Please enter your full name'
+    if (attemptPasswordValidation && !fullName) errors.nameError = 'Please enter your full name'
     if (!email) errors.emailError = 'Please enter your email address'
     if (!password) errors.passwordError = 'Please enter a password'
     if (email && !validateEmail(email)) errors.emailError = 'Please enter a valid email address'
@@ -95,8 +96,8 @@ export default function useAuthUser() {
     return user
   }
 
-  const update = async (email, password) => {
-    const { data, error } = await supabase.auth.updateUser({ email, password })
+  const updateUsername = async (newEmail) => {
+    const { data, error } = await supabase.auth.updateUser({ email, password: user.password })
     if (error) throw error
     return user
   }
@@ -137,7 +138,7 @@ export default function useAuthUser() {
     isLoggedIn,
     logout,
     register,
-    update,
+    updateUsername,
     sendPasswordRestEmail,
     getUser,
     validateEmail

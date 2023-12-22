@@ -23,7 +23,7 @@ const handleSubmit = async () => {
     isLoading.value = false
 
   } catch (error) {
-    alert('Evan', error.message)
+    //do some error handling
     isLoading.value = false
   }
 }

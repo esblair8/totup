@@ -23,9 +23,8 @@
 
                 <div class="field ">
                   <div class="control">
-                    <button class="button  ml-2 is-primary" @click.prevent="submitForm">Submit</button>
-                    <button class="button mr-2 is-pulled-right is-danger" @click.prevent="router.go(-1)">Go Back</button>
-
+                    <button class="button mr-2 is-danger" @click.prevent="router.go(-1)">Go Back</button>
+                    <button class="button  ml-2 is-pulled-right is-primary" @click.prevent="submitForm">Submit</button>
                   </div>
                 </div>
               </form>
@@ -62,9 +61,8 @@ const submitForm = () => {
     message: sanitizedMessage
   }
 
-  alert(data)
   submitted.value = true
-
+  //send to backend
 }
 
 

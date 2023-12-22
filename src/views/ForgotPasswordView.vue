@@ -16,7 +16,7 @@ const handleResetPassword = async () => {
   try {
     await sendPasswordRestEmail(email.value)
   } catch (error) {
-    alert(error.message)
+    //do some error handling
   }
 }
 </script>

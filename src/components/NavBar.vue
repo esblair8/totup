@@ -84,7 +84,7 @@ const handleLogout = async () => {
     router.push('/login')
 
   } catch (error) {
-    alert(error.message)
+    //do some error handling
   }
 }
 

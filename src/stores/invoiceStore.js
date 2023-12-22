@@ -12,21 +12,6 @@ const useInvoiceStore = defineStore('invoiceStore', {
     errorMessage: null,
   }),
   getters: {
-    async fetchInvoices(state) {
-
-      if (this.invoiceData.length > 0) return
-     
-      let { data, error } = await supabase
-      .from('invoices')
-      .select('*')
-    
-      console.log(data)
-      if (error)  {
-        this.errorMessage = error.message
-      } else {
-        this.invoiceData = data
-    }
-    },
     filteredInvoices(state) {
       const searchTerm = state.searchName.toLowerCase().trim()
       const selectedStatusValue = state.selectedStatus.toLowerCase().trim()
@@ -60,8 +45,22 @@ const useInvoiceStore = defineStore('invoiceStore', {
     resetFilter() {
       this.searchName = ''
       this.selectedStatus = ''
+    },
+    async fetchInvoices(state) {
+      if (this.invoiceData.length > 0) return
+     
+      let { data, error } = await supabase
+      .from('invoices')
+      .select(`* , line_items(*)`)
+    
+      if (error)  {
+        this.errorMessage = error.message
+      } else {
+        this.invoiceData = data
     }
+    },
   },
+
   methods: {
     getTagColor(status) {
       switch (status) {

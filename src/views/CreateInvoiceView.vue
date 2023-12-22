@@ -1,7 +1,18 @@
 <script setup>
-import { ref, reactive, computed, watch } from 'vue'
+import { ref, reactive, computed, onMounted } from 'vue'
+import { storeToRefs } from 'pinia'
 import HeroTitle from '@/components/HeroTitle.vue'
+import useUserInfoStore from '../stores/userInfoStore'
+import useAuthUser from '@/composables/UseAuthUser'
 
+const userInfoStore = useUserInfoStore()
+const { userInfo } = storeToRefs(userInfoStore)
+
+const { loggedInUser, isLoggedIn } = useAuthUser()
+
+onMounted(async () => {
+  await userInfoStore.fetchUserInfo()
+})
 const imageUrl = ref(null)
 
 const handleFileChange = (event) => {
@@ -33,7 +44,6 @@ const getTotalForLineItems = computed(() => {
 
 
 const recalculateTotal = (index) => {
-  console.log("recalculateTotal", index)
   const item = lineItems.value[index];
   lineItems.value[index].total = item.hours * item.rate;
   return item.total
@@ -48,7 +58,7 @@ const addLineItem = () => {
 }
 
 const removeLineItem = () => {
-  if(lineItems.value.length > 1) {
+  if (lineItems.value.length > 1) {
     lineItems.value.pop()
   } else {
     alert("You must have at least one line item")
@@ -62,7 +72,7 @@ const initialInvoiceData = reactive({
   customerEmailAddress: "",
   customerAddress: "",
   companyName: "", //pull from users table
-  companyAddress: "", //pull from users table
+  companyAddress: userInfoStore.street, //pull from users table
   companyEmailAddress: "", //pull from users table
   terms: "",
   notes: ""
@@ -76,7 +86,7 @@ const saveInvoiceToDb = () => {
 <template>
   <div class="container content m-4">
     <HeroTitle title="Create Invoice" />
-    <div class="invoice">
+    <div v-if="isLoggedIn()" class="invoice">
       <div class="invoice-header columns is-vcentered">
         <div v-if="imageUrl" class="column image-selector is-2">
           <span class="delete-icon is-clickable" @click="deleteImage">
@@ -108,13 +118,17 @@ const saveInvoiceToDb = () => {
           <h2 class="is-size-5">Bill To</h2>
           <input class="input is-clickable is-small" v-model="initialInvoiceData.customerName">
           <input class="input is-clickable is-small" v-model="initialInvoiceData.customerAddress">
+          <input class="input is-clickable is-small" v-model="initialInvoiceData.customerPostCode">
+          <input class="input is-clickable is-small" v-model="initialInvoiceData.customerCountry">
           <input class="input is-clickable is-small" v-model="initialInvoiceData.customerEmailAddress">
         </div>
         <div class="bill-from column is-half has-text-right">
           <h2 class="is-size-5">Bill From</h2>
-          <input class="input is-clickable is-small" v-model="initialInvoiceData.companyName">
-          <input class="input is-clickable is-small" v-model="initialInvoiceData.companyAddress">
-          <input class="input is-clickable is-small" v-model="initialInvoiceData.companyEmailAddress">
+          <input class="input is-clickable is-small" v-model="userInfo.full_name">
+          <input class="input is-clickable is-small" v-model="userInfo.address">
+          <input class="input is-clickable is-small" v-model="userInfo.post_code">
+          <input class="input is-clickable is-small" v-model="userInfo.country">
+          <input class="input is-clickable is-small" v-model="loggedInUser.email">
         </div>
       </div>
 
@@ -147,13 +161,15 @@ const saveInvoiceToDb = () => {
 
         </tbody>
       </table>
-      {{  lineItems.length }}
-      <button class="button is-small is-primary" @click="addLineItem">Add Another Line Item</button>
-      <button class="button is-small is-warning ml-3" @click="removeLineItem">Remove Line Item</button>
+
+      <div class="button-section">
+        <button class="button is-small is-primary" @click="addLineItem">Add Another Line Item</button>
+        <button class="button is-small is-warning ml-3" @click="removeLineItem">Remove Line Item</button>
+      </div>
 
       <div class="invoice-total has-text-right mr-6">
 
-        <p><strong>Total: </strong>£ {{ getTotalForLineItems }}</p>
+        <p><strong>Total: </strong>{{ userInfo.currency }} {{ getTotalForLineItems }}</p>
 
       </div>
 
@@ -229,8 +245,6 @@ const saveInvoiceToDb = () => {
   font-size: 15px;
 }
 
-
-
 .bill-from input {
 
   text-align: right;
@@ -264,11 +278,13 @@ const saveInvoiceToDb = () => {
   text-align: center;
 }
 
+*/
 .terms-section {
   text-align: center;
-   margin-bottom: 20px; 
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
-*/
+
 .image-selector {
   position: relative;
 }

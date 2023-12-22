@@ -18,7 +18,7 @@ const handleLogin = async () => {
     router.push('/')
 
   } catch (error) {
-    alert(error.message)
+    //do some error handling
   }
 }
 </script>
