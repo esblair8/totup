@@ -50,7 +50,7 @@ const router = createRouter({
       component: () => import('../views/SubscriptionView.vue')
     },
     {
-     
+
       path: '/invoices',
       name: 'invoices',
       meta: { requiresAuth: true },
@@ -82,14 +82,14 @@ const router = createRouter({
 })
 
 // add route gaurds here to check if user is logged in
-router.beforeEach(async (to, from, next) => {
-  const requiresAuth = to.meta.requiresAuth
-  console.log('requiresAuth', requiresAuth, 'isLoggedIn', isLoggedIn(), 'to', to)
-  if (requiresAuth && !isLoggedIn()) {
-    next('/login')
-  } else {
-    next()
-  } ``
-})
+// router.beforeEach(async (to, from, next) => {
+//   const requiresAuth = to.meta.requiresAuth
+//   console.log('requiresAuth', requiresAuth, 'isLoggedIn', isLoggedIn(), 'to', to)
+//   if (requiresAuth && !isLoggedIn()) {
+//     next('/login')
+//   } else {
+//     next()
+//   } ``
+// })
 
 export default router
