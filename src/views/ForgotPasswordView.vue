@@ -1,17 +1,13 @@
 <script setup>
-import { ref } from "vue"
-import useAuthUser from "@/composables/UseAuthUser"
-import { useRouter } from "vue-router"
+import { ref } from 'vue'
+import useAuthUser from '@/composables/UseAuthUser'
+import { useRouter } from 'vue-router'
 
-// Use necessary composables
 const router = useRouter()
 const { sendPasswordRestEmail } = useAuthUser()
 
-// keep up with form data
-const email = ref("")
+const email = ref('')
 
-// call the proper login method from the AuthUser composable
-// on the submit of the form
 const handleResetPassword = async () => {
   try {
     await sendPasswordRestEmail(email.value)
@@ -31,7 +27,7 @@ const handleResetPassword = async () => {
             <div class="field">
               <label for="" class="label">Email</label>
               <div class="control has-icons-left">
-                <input type="email" placeholder="email" class="input" v-model="email" required>
+                <input type="email" placeholder="email" class="input" v-model="email" required />
                 <span class="icon is-small is-left">
                   <font-awesome-icon icon="envelope" />
                 </span>
@@ -48,6 +44,5 @@ const handleResetPassword = async () => {
     </div>
   </div>
 </template>
-
 
 <style></style>

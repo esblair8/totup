@@ -1,7 +1,10 @@
 <template>
   <div class="field">
-    <button class="button is-fullwidth is-danger " :class="{ 'is-loading': isLoading }"
-      @click.prevent="handleLogin('google')">
+    <button
+      class="button is-fullwidth is-danger"
+      :class="{ 'is-loading': isLoading }"
+      @click.prevent="handleLogin('google')"
+    >
       <span class="icon is-small">
         <font-awesome-icon icon="fa-brands fa-google" />
       </span>
@@ -11,8 +14,8 @@
 </template>
 
 <script setup>
-import { ref } from "vue"
-import useAuthUser from "@/composables/UseAuthUser"
+import { ref } from 'vue'
+import useAuthUser from '@/composables/UseAuthUser'
 
 const { loginWithSocialProvider } = useAuthUser()
 const isLoading = ref(false)

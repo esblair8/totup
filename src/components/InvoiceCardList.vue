@@ -21,7 +21,11 @@
               </tr>
               <tr>
                 <td>Status</td>
-                <td><span :class="getTagColor(invoice.status)" class="tag is-rounded">{{ invoice.status }}</span></td>
+                <td>
+                  <span :class="getTagColor(invoice.status)" class="tag is-rounded">{{
+                    invoice.status
+                  }}</span>
+                </td>
               </tr>
               <tr>
                 <td>Period</td>
@@ -36,7 +40,7 @@
         </div>
       </div>
       <div class="card-footer">
-        <a href="#" class="card-footer-item ">Preview Invoice</a>
+        <a href="#" class="card-footer-item">Preview Invoice</a>
         <a href="#" class="card-footer-item">Edit Invoice</a>
         <a href="#" class="card-footer-item">Send Invoice</a>
       </div>
@@ -53,7 +57,6 @@
 <script setup>
 import FilterControls from '@/components/FilterControls.vue'
 import useInvoiceStore from '@/stores/invoiceStore'
-
 
 const invoiceStore = useInvoiceStore()
 

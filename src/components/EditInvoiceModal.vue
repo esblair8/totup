@@ -4,10 +4,13 @@
     <div class="modal-card">
       <header class="modal-card-head">
         <p class="modal-card-title">Edit Invoice</p>
-        <button class="delete" aria-label="close" @click="showModalStore.closeModal('editModal')"></button>
+        <button
+          class="delete"
+          aria-label="close"
+          @click="showModalStore.closeModal('editModal')"
+        ></button>
       </header>
       <section class="modal-card-body">
-
         <form>
           <div class="field">
             <label class="label">Name</label>
@@ -60,6 +63,5 @@ const form = reactive({
 
 const props = defineProps(['invoice'])
 </script>
-
 
 <style scoped></style>

@@ -1,8 +1,5 @@
 <script setup>
 import HeroTitle from '@/components/HeroTitle.vue'
-
-
-
 </script>
 
 <template>
@@ -17,22 +14,21 @@ import HeroTitle from '@/components/HeroTitle.vue'
         <div class="field">
           <label class="label">Parent's Name</label>
           <div class="control">
-            <input class="input" type="text" placeholder="Full Name">
+            <input class="input" type="text" placeholder="Full Name" />
           </div>
         </div>
         <div class="field">
           <label class="label">Parent's Email</label>
           <div class="control">
-            <input class="input" type="email" placeholder="Email Address">
+            <input class="input" type="email" placeholder="Email Address" />
           </div>
         </div>
         <div class="field">
           <label class="label">Period</label>
           <div class="control">
-            <input class="input" type="email" placeholder="June 2023">
+            <input class="input" type="email" placeholder="June 2023" />
           </div>
         </div>
-
       </div>
     </div>
 
@@ -41,19 +37,18 @@ import HeroTitle from '@/components/HeroTitle.vue'
       <div class="form">
         <div class="field">
           <label class="label">Child's Name</label>
-          <input class="input" type="text" placeholder="Name">
-
+          <input class="input" type="text" placeholder="Name" />
         </div>
         <div class="field">
           <label class="label">Date</label>
           <div class="control">
-            <input class="input" type="date" placeholder="Email Address">
+            <input class="input" type="date" placeholder="Email Address" />
           </div>
         </div>
         <div class="field">
           <label class="label">Hours</label>
           <div class="control">
-            <input class="input" type="number" placeholder="Hours">
+            <input class="input" type="number" placeholder="Hours" />
           </div>
         </div>
         <div class="field is-grouped">

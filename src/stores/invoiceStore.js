@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import  useSupabase  from '@/composables/UseSupabase'
+import useSupabase from '@/composables/UseSupabase'
 
 const { supabase } = useSupabase()
 
@@ -9,7 +9,7 @@ const useInvoiceStore = defineStore('invoiceStore', {
     searchName: '',
     selectedStatus: '',
     selectedInvoiceId: null,
-    errorMessage: null,
+    errorMessage: null
   }),
   getters: {
     filteredInvoices(state) {
@@ -19,14 +19,12 @@ const useInvoiceStore = defineStore('invoiceStore', {
       let filtered = state.invoiceData
 
       if (searchTerm) {
-        filtered = filtered.filter(invoice =>
-          invoice.name.toLowerCase().includes(searchTerm)
-        )
+        filtered = filtered.filter((invoice) => invoice.name.toLowerCase().includes(searchTerm))
       }
 
       if (selectedStatusValue) {
-        filtered = filtered.filter(invoice =>
-          invoice.status.toLowerCase() === selectedStatusValue
+        filtered = filtered.filter(
+          (invoice) => invoice.status.toLowerCase() === selectedStatusValue
         )
       }
 
@@ -34,9 +32,9 @@ const useInvoiceStore = defineStore('invoiceStore', {
     },
     getInvoiceById: (state) => {
       return (id) => {
-        return state.invoiceData.filter(invoice => invoice.id === id )[0]
+        return state.invoiceData.filter((invoice) => invoice.id === id)[0]
       }
-    },
+    }
   },
   actions: {
     filterByStatus(status) {
@@ -48,17 +46,15 @@ const useInvoiceStore = defineStore('invoiceStore', {
     },
     async fetchInvoices(state) {
       if (this.invoiceData.length > 0) return
-     
-      let { data, error } = await supabase
-      .from('invoices')
-      .select(`* , line_items(*)`)
-    
-      if (error)  {
+
+      let { data, error } = await supabase.from('invoices').select(`* , line_items(*)`)
+
+      if (error) {
         this.errorMessage = error.message
       } else {
         this.invoiceData = data
+      }
     }
-    },
   },
 
   methods: {

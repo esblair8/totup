@@ -1,35 +1,33 @@
-import useSupabase from "@/composables/UseSupabase"
-import { ref, reactive } from "vue"
+import useSupabase from '@/composables/UseSupabase'
+import { ref, reactive } from 'vue'
 
-
-//bound to login and reigster form inputs
-const user = reactive({
-  fullName: '',
+const userData = reactive({
   email: '',
   password: '',
-  confirmPassword: '',
+  confirmPassword: ''
 })
 
 const loggedInUser = ref(null)
 
 const errors = reactive({
-  nameError: '',
   emailError: '',
   passwordError: ''
 })
 
 export default function useAuthUser() {
-
   const { supabase } = useSupabase()
 
-  const login = async (credentials) => {
-    validateCredentials(credentials, false)
+  const login = async () => {
+    validateCredentials(false)
     if (errors.nameError || errors.emailError || errors.passwordError) {
       throw new Error('Invalid credentials')
     }
-    const { user, error } = await supabase.auth.signInWithPassword(
-      { email: credentials.email, password: credentials.password }
-    )
+    console.log('valid credentials')
+
+    const { user, error } = await supabase.auth.signInWithPassword({
+      email: userData.email,
+      password: userData.password
+    })
     if (error) throw error
     return user
   }
@@ -38,11 +36,7 @@ export default function useAuthUser() {
    * Login with refresh token
    * Useful for logging in after email confirmations
    */
-  const loginWithRefreshToken = async (token) => {
-    const { user, error } = await supabase.auth.signIn({ refreshToken: token })
-    if (error) throw error
-    return user
-  }
+  const loginWithRefreshToken = async (token) => {}
 
   const loginWithSocialProvider = async (provider) => {
     const { user, error } = await supabase.auth.signInWithOAuth({
@@ -64,72 +58,83 @@ export default function useAuthUser() {
     return !!loggedInUser.value
   }
 
-  const validateCredentials = (credentials, attemptPasswordValidation) => {
-    const { fullName, email, password } = credentials
+  const validateCredentials = (attemptPasswordValidation) => {
+    errors.emailError = ''
+    errors.passwordError = ''
 
-    if (attemptPasswordValidation && !fullName) errors.nameError = 'Please enter your full name'
+    const { email, password } = userData
+
     if (!email) errors.emailError = 'Please enter your email address'
     if (!password) errors.passwordError = 'Please enter a password'
     if (email && !validateEmail(email)) errors.emailError = 'Please enter a valid email address'
-    if (attemptPasswordValidation && password && !validatePassword) errors.passwordError = ('password must contain at least 8 characters, 1 uppercase letter, 1 lowercase letter, and 1 number')
+    let isInvalidPassword = !validatePassword(password)
+    if (attemptPasswordValidation && password && isInvalidPassword)
+      errors.passwordError =
+        'password must contain at least 8 characters, including:\n 1 uppercase letter, 1 lowercase letter, and 1 number'
   }
 
-  const register = async (credentials) => {
-    validateCredentials(credentials)
-    if (errors.nameError || errors.emailError || errors.passwordError) {
-      throw new Error('Invalid credentials')
+  const register = async () => {
+    validateCredentials(true)
+    if (errors.emailError || errors.passwordError) {
+      console.log('valid credentials', email, password)
+
+      throw new Error('Invalid username or password')
     }
+    const { email, password } = userData
+    console.log('valid credentials', email, password)
 
-    const { user, error } = await supabase.auth.signUp(
-      {
-        email: credentials.email,
-        password: credentials.password,
-        options: {
-          redirectTo: `${window.location.origin}/me?fromEmail=registrationConfirmation"`,
-          data: {
-            full_name: credentials.name
-          }
-        }
-      }
-    )
+    const { user, error } = await supabase.auth.signUp({
+      email: email,
+      password: password
+    })
     if (error) throw error
     return user
   }
 
-  const updateUsername = async (newEmail) => {
-    const { data, error } = await supabase.auth.updateUser({ email, password: user.password })
+  const updateEmail = async (newEmail) => {
+    console.log('updateEmail', newEmail)
+    const { data, error } = await supabase.auth.updateUser({ email: newEmail })
     if (error) throw error
-    return user
+    return userData
+  }
+
+  const updatePassword = async (newPassword) => {
+    const { data, error } = await supabase.auth.updateUser({
+      email: loggedInUser.value.email,
+      password: newPassword
+    })
+    if (error) throw error
+    return userData
   }
 
   const sendPasswordRestEmail = async (email) => {
-    const { user, error } = await supabase.auth.resetPasswordForEmail(
-      email
-    )
+    console.log('sendPasswordRestEmail', email)
+    const { user, error } = await supabase.auth.resetPasswordForEmail(email)
     if (error) throw error
     return user
   }
 
   const validateEmail = (email) => {
-    return String(email)
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      )
+    return /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+      email.toLowerCase()
+    )
   }
 
   const validatePassword = (password) => {
-    return String(password)
-      .match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)
+    const result = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(password)
+    console.log('validatePassword', result)
+    return result
   }
 
   const getUser = async () => {
-    const { data: { user } } = await supabase.auth.getUser()
+    const {
+      data: { user }
+    } = await supabase.auth.getUser()
     return user
   }
 
   return {
-    user,
+    user: userData,
     errors,
     loggedInUser,
     login,
@@ -138,7 +143,8 @@ export default function useAuthUser() {
     isLoggedIn,
     logout,
     register,
-    updateUsername,
+    updateEmail,
+    updatePassword,
     sendPasswordRestEmail,
     getUser,
     validateEmail

@@ -1,24 +1,26 @@
 <script setup>
-import useAuthUser from "@/composables/UseAuthUser"
-import { useRouter, useRoute } from "vue-router"
-import OrBox from "@/components/OrBox.vue"
-import OAuthButtons from "../components/OAuthButtons.vue"
-import LoginRegisterLink from "../components/LoginRegisterLink.vue"
+import { ref } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 
-// Use necessary composables
+import useAuthUser from '@/composables/UseAuthUser'
+
+import OrBox from '@/components/OrBox.vue'
+import OAuthButtons from '@/components/OAuthButtons.vue'
+import LoginRegisterLink from '@/components/LoginRegisterLink.vue'
+
 const router = useRouter()
 
 const { login, errors, user } = useAuthUser()
 
-// call the proper login method from the AuthUser composable
-// on the submit of the form
+const logInError = ref(null)
+
 const handleLogin = async () => {
   try {
-    await login(user);
+    await login()
     router.push('/')
-
   } catch (error) {
-    //do some error handling
+    logInError.value = error.message
+    console.log(error)
   }
 }
 </script>
@@ -26,33 +28,45 @@ const handleLogin = async () => {
 <template>
   <div class="hero-body">
     <div class="container mt-6">
-      <div class="columns is-centered ">
+      <div class="columns is-centered">
         <div class="column is-4-desktop is-4-widescreen box">
           <h1 class="title is-1">Sign In</h1>
           <form action="" class="field">
             <div class="field">
               <label for="" class="label">Email</label>
               <div class="control has-icons-left">
-                <input type="email" placeholder="email" class="input" v-model="user.email" required>
+                <input
+                  type="email"
+                  placeholder="email"
+                  class="input"
+                  v-model="user.email"
+                  required
+                />
                 <span class="icon is-small is-left">
                   <font-awesome-icon icon="envelope" />
                 </span>
-              </div>
-              <div class="has-text-danger" v-if="errors.emailError">
-                {{ errors.emailError }}
               </div>
             </div>
             <div class="field">
               <label for="" class="label">Password</label>
               <div class="control has-icons-left">
-                <input type="password" placeholder="password" class="input" v-model="user.password" required>
+                <input
+                  type="password"
+                  placeholder="password"
+                  class="input"
+                  v-model="user.password"
+                  required
+                />
                 <span class="icon is-small is-left">
                   <font-awesome-icon icon="lock" />
                 </span>
               </div>
-              <div class="field mt-2 mb-5">
-                <RouterLink to="/forgot-password">Forgot Password? </RouterLink>
+              <div class="field mt-2 mb-2">
+                <RouterLink to="/forgot-password">Forgot Password?</RouterLink>
               </div>
+            </div>
+            <div class="has-text-danger has-text-centered pb-2" v-if="logInError">
+              {{ logInError }}
             </div>
             <div class="field">
               <button class="button is-fullwidth is-success" @click.prevent="handleLogin()">
@@ -62,7 +76,11 @@ const handleLogin = async () => {
           </form>
           <OrBox />
           <OAuthButtons />
-          <LoginRegisterLink message="Don't have an account? " to="register" linkText="Create one here" />
+          <LoginRegisterLink
+            message="Don't have an account? "
+            to="register"
+            linkText="Create one here"
+          />
         </div>
       </div>
     </div>

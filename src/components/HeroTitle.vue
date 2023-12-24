@@ -9,5 +9,4 @@ const props = defineProps(['title', 'subtitle'])
       {{ title }}
     </h3>
   </div>
-
 </template>

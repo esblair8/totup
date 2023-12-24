@@ -9,31 +9,59 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(invoice) in invoiceStore.filteredInvoices" :key="invoice.id">
+          <tr v-for="invoice in invoiceStore.filteredInvoices" :key="invoice.id">
             <td class="has-text-centered">{{ invoice.bill_to }}</td>
             <td class="has-text-centered">{{ invoice.rate }}</td>
             <td class="has-text-centered">£{{ invoice.hours }}</td>
             <td class="has-text-centered">£{{ invoice.total }}</td>
-            <td class="has-text-centered"><span :class="getTagColor(invoice.status)" class="tag is-rounded">{{
-              invoice.status }}</span></td>
+            <td class="has-text-centered">
+              <span :class="getTagColor(invoice.status)" class="tag is-rounded">{{
+                invoice.status
+              }}</span>
+            </td>
             <td class="has-text-centered">{{ invoice.period }}</td>
             <td class="has-text-centered">{{ invoice.date }}</td>
 
             <td class="has-text-centered">
               <a href="https://www.africau.edu/images/default/sample.pdf">
-                <font-awesome-icon class="mx-2 is-clickable" icon="fa-regular fa-file" size="lg"
-                  title="Preview Invoice" />
+                <font-awesome-icon
+                  class="mx-2 is-clickable"
+                  icon="fa-regular fa-file"
+                  size="lg"
+                  title="Preview Invoice"
+                />
               </a>
               <!-- <font-awesome-icon class="mx-2 is-clickable" icon="fa-regular fa-file" size="lg" title="Preview Invoice" /> -->
-              <font-awesome-icon class="mx-2 is-clickable" icon="pen-to-square" size="lg"
-                @click="showModalWithSelectedInvoice('editModal', invoice.id)" title="Edit Invoice Details" />
-              <font-awesome-icon class="mx-2 is-clickable" icon="fa-regular fa-envelope" size="lg"
+              <font-awesome-icon
+                class="mx-2 is-clickable"
+                icon="pen-to-square"
+                size="lg"
+                @click="showModalWithSelectedInvoice('editModal', invoice.id)"
+                title="Edit Invoice Details"
+              />
+              <font-awesome-icon
+                class="mx-2 is-clickable"
+                icon="fa-regular fa-envelope"
+                size="lg"
                 @click="showModalWithSelectedInvoice('sendModal', invoice.id)"
-                title="Resend Invoice via email (popup appears)" />
-              <font-awesome-icon class="mx-2 is-clickable" icon="check" size="lg" @click="invoice.status = 'paid'"
-                title="Mark as paid" v-if="invoice.status != 'paid'" />
-              <font-awesome-icon class="mx-2 is-clickable" icon="xmark" size="lg" @click="invoice.status = 'unpaid'"
-                title="Mark as unpaid" v-else />
+                title="Resend Invoice via email (popup appears)"
+              />
+              <font-awesome-icon
+                class="mx-2 is-clickable"
+                icon="check"
+                size="lg"
+                @click="invoice.status = 'paid'"
+                title="Mark as paid"
+                v-if="invoice.status != 'paid'"
+              />
+              <font-awesome-icon
+                class="mx-2 is-clickable"
+                icon="xmark"
+                size="lg"
+                @click="invoice.status = 'unpaid'"
+                title="Mark as unpaid"
+                v-else
+              />
             </td>
           </tr>
         </tbody>
@@ -82,7 +110,6 @@ const showModalWithSelectedInvoice = (modalName, invoiceId) => {
   showModalStore.openModal(modalName)
   invoiceStore.selectedInvoiceId = invoiceId
 }
-
 </script>
 
 <style>

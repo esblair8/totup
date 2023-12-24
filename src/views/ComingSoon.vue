@@ -1,10 +1,10 @@
-`<script setup>
+<script setup>
+import HeroTitle from '@/components/HeroTitle.vue'
 </script>
 
 <template>
-  <main>
-    <h1>Still under construction.</h1>
-    <h5>Coming Soon</h5>
-  </main>
+  <div class="container content m-4">
+    <HeroTitle title="Help Center" />
+    <p>Coming Soon</p>
+  </div>
 </template>
-`

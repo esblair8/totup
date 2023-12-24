@@ -10,7 +10,7 @@
                 <div class="field">
                   <label class="label">Subject</label>
                   <div class="control">
-                    <input class="input" type="text" v-model="subject">
+                    <input class="input" type="text" v-model="subject" />
                   </div>
                 </div>
 
@@ -21,18 +21,30 @@
                   </div>
                 </div>
 
-                <div class="field ">
+                <div class="field">
                   <div class="control">
-                    <button class="button mr-2 is-danger" @click.prevent="router.go(-1)">Go Back</button>
-                    <button class="button  ml-2 is-pulled-right is-primary" @click.prevent="submitForm">Submit</button>
+                    <button class="button mr-2 is-danger" @click.prevent="$router.go(-1)">
+                      Go Back
+                    </button>
+                    <button
+                      class="button ml-2 is-pulled-right is-primary"
+                      @click.prevent="submitForm"
+                    >
+                      Submit
+                    </button>
                   </div>
                 </div>
               </form>
             </div>
 
             <div v-else>
-              <p>Thanks for getting in contact. A member of our team will get back to you as soon as possible.</p>
-              <button class="button is-primary mt-5" @click="router.replace('/')" type="submit">Go Home</button>
+              <p>
+                Thanks for getting in contact. A member of our team will get back to you as soon as
+                possible.
+              </p>
+              <button class="button is-primary mt-5" @click="$router.push('/')" type="submit">
+                Go Home
+              </button>
             </div>
           </div>
         </div>
@@ -40,13 +52,10 @@
     </div>
   </div>
 </template>
-  
+
 <script setup>
 import { ref } from 'vue'
 import DOMPurify from 'dompurify'
-import { useRouter } from 'vue-router'
-
-const router = useRouter()
 
 const subject = ref('')
 const message = ref('')
@@ -64,10 +73,8 @@ const submitForm = () => {
   submitted.value = true
   //send to backend
 }
-
-
 </script>
-  
+
 <style>
 .contact-us {
   max-width: 500px;
@@ -78,4 +85,3 @@ const submitForm = () => {
   margin-top: 20px;
 }
 </style>
-  

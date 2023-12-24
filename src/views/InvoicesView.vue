@@ -1,9 +1,9 @@
 <script setup>
 import { useMediaQuery } from '@vueuse/core'
 
-import InvoiceCardList from "@/components/InvoiceCardList.vue"
-import InvoiceTable from "@/components/InvoiceTable.vue"
-import HeroTitle from "@/components/HeroTitle.vue"
+import InvoiceCardList from '@/components/InvoiceCardList.vue'
+import InvoiceTable from '@/components/InvoiceTable.vue'
+import HeroTitle from '@/components/HeroTitle.vue'
 import EditInvoiceModal from '@/components/EditInvoiceModal.vue'
 import SendInvoiceModal from '@/components/SendInvoiceModal.vue'
 

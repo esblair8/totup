@@ -7,7 +7,6 @@ import { useMediaQuery } from '@vueuse/core'
 const route = useRoute()
 
 const isLargeScreen = useMediaQuery('(min-width: 769px)')
-
 </script>
 
 <template>
@@ -21,10 +20,6 @@ const isLargeScreen = useMediaQuery('(min-width: 769px)')
 
 <style>
 @import 'bulma/css/bulma.min.css';
-
-.full-height {
-  height: 100vh;
-}
 
 .top {
   margin-top: 4rem;

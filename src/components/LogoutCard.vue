@@ -5,10 +5,10 @@
     <button class="button is-small" @click="logUserOut">Log out</button>
   </div>
 </template>
-  
+
 <script setup>
 import useAuthUser from '@/composables/UseAuthUser'
-import router from '../router';
+import router from '../router'
 
 const { logout } = useAuthUser()
 
@@ -16,8 +16,6 @@ const logUserOut = () => {
   logout()
   router.push({ path: '/login' })
 }
-
 </script>
-  
+
 <style></style>
-  

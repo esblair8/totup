@@ -1,6 +1,5 @@
 <script setup>
 import { onMounted } from 'vue'
-import { ref } from 'vue'
 import HeroTitle from '@/components/HeroTitle.vue'
 import LogoutCard from '@/components/LogoutCard.vue'
 import DangerZoneCard from '@/components/DangerZoneCard.vue'
@@ -8,7 +7,7 @@ import ConnectedAccountsCard from '@/components/ConnectedAccountsCard.vue'
 import BankDetailsCard from '@/components/BankDetailsCard.vue'
 import EditProfileCard from '@/components/EditProfileCard.vue'
 import BillingCard from '@/components/BillingCard.vue'
-import PricingCard from '@/components/PricingCard.vue'
+import RateCard from '@/components/RateCard.vue'
 
 import useUserInfoStore from '@/stores/userInfoStore'
 const userInfoStore = useUserInfoStore()
@@ -25,7 +24,7 @@ onMounted(async () => {
     <BillingCard />
     <EditProfileCard />
     <BankDetailsCard />
-    <PricingCard />
+    <RateCard />
     <ConnectedAccountsCard />
     <DangerZoneCard />
     <LogoutCard />

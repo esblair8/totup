@@ -10,25 +10,25 @@
     </div>
   </div>
 </template>
-  
+
 <script>
-import { useRouter } from 'vue-router';
+import { useRouter } from 'vue-router'
 
 export default {
   setup() {
-    const router = useRouter();
+    const router = useRouter()
 
     const goBack = () => {
-      router.go(-1);
-    };
+      router.go(-1)
+    }
 
     return {
       goBack
-    };
+    }
   }
-};
+}
 </script>
-  
+
 <style>
 .error-page {
   display: flex;
@@ -45,4 +45,3 @@ export default {
   margin-top: 20px;
 }
 </style>
-  

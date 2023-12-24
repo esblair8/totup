@@ -30,13 +30,19 @@ const router = createRouter({
     {
       path: '/email-confirmation',
       name: 'email-confirmation',
-      component: () => import('../views/EmailConfirmationView.vue')
+      component: () => import('../views/EmailChangedConfirmationView.vue')
     },
     {
       path: '/settings',
       name: 'settings',
       meta: { requiresAuth: true },
       component: () => import('../views/SettingsView.vue')
+    },
+    {
+      path: '/help',
+      name: 'help',
+      meta: { requiresAuth: true },
+      component: () => import('../views/ComingSoon.vue')
     },
     {
       path: '/complete-registration',
@@ -50,7 +56,6 @@ const router = createRouter({
       component: () => import('../views/SubscriptionView.vue')
     },
     {
-
       path: '/invoices',
       name: 'invoices',
       meta: { requiresAuth: true },
