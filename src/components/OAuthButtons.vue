@@ -1,18 +1,3 @@
-<template>
-  <div class="field">
-    <button
-      class="button is-fullwidth is-danger"
-      :class="{ 'is-loading': isLoading }"
-      @click.prevent="handleLogin('google')"
-    >
-      <span class="icon is-small">
-        <font-awesome-icon icon="fa-brands fa-google" />
-      </span>
-      <span>Login with Google</span>
-    </button>
-  </div>
-</template>
-
 <script setup>
 import { ref } from 'vue'
 import useAuthUser from '@/composables/UseAuthUser'
@@ -30,3 +15,18 @@ const handleLogin = async (provider) => {
   }
 }
 </script>
+
+<template>
+  <div class="field">
+    <button
+      class="button is-fullwidth is-danger"
+      :class="{ 'is-loading': isLoading }"
+      @click.prevent="handleLogin('google')"
+    >
+      <span class="icon is-small">
+        <font-awesome-icon icon="fa-brands fa-google" />
+      </span>
+      <span>Login with Google</span>
+    </button>
+  </div>
+</template>

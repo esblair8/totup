@@ -1,3 +1,27 @@
+<script setup>
+import { onMounted } from 'vue'
+
+import router from '../router'
+import FilterControls from '@/components/FilterControls.vue'
+
+import useInvoiceStore from '@/stores/invoiceStore'
+import useShowModalStore from '@/stores/showModalStore'
+
+const showModalStore = useShowModalStore()
+const invoiceStore = useInvoiceStore()
+
+onMounted(() => {
+  invoiceStore.fetchInvoices()
+})
+
+const tableHeaders = ['Name', 'Rate', 'Hours', 'Total', 'Status', 'Period', 'Date Sent', 'Actions']
+
+const showModalWithSelectedInvoice = (modalName, invoiceId) => {
+  showModalStore.openModal(modalName)
+  invoiceStore.selectedInvoiceId = invoiceId
+}
+</script>
+
 <template>
   <section class="content">
     <div v-if="invoiceStore.filteredInvoices.length > 0">
@@ -15,7 +39,7 @@
             <td class="has-text-centered">£{{ invoice.hours }}</td>
             <td class="has-text-centered">£{{ invoice.total }}</td>
             <td class="has-text-centered">
-              <span :class="getTagColor(invoice.status)" class="tag is-rounded">{{
+              <span :class="invoiceStore.getTagColor(invoice.status)" class="tag is-rounded">{{
                 invoice.status
               }}</span>
             </td>
@@ -75,42 +99,6 @@
     </div>
   </section>
 </template>
-
-<script setup>
-import router from '../router'
-import FilterControls from '@/components/FilterControls.vue'
-
-import useInvoiceStore from '@/stores/invoiceStore'
-import useShowModalStore from '@/stores/showModalStore'
-
-import { onMounted } from 'vue'
-
-const showModalStore = useShowModalStore()
-const invoiceStore = useInvoiceStore()
-
-onMounted(() => {
-  invoiceStore.fetchInvoices()
-})
-const getTagColor = (status) => {
-  switch (status) {
-    case 'draft':
-      return 'is-warning'
-    case 'sent':
-      return 'is-info'
-    case 'unpaid':
-      return 'is-danger'
-    case 'paid':
-      return 'is-success'
-  }
-}
-
-const tableHeaders = ['Name', 'Rate', 'Hours', 'Total', 'Status', 'Period', 'Date Sent', 'Actions']
-
-const showModalWithSelectedInvoice = (modalName, invoiceId) => {
-  showModalStore.openModal(modalName)
-  invoiceStore.selectedInvoiceId = invoiceId
-}
-</script>
 
 <style>
 .is-circular {

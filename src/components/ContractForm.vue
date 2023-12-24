@@ -12,7 +12,3 @@
     <button class="button ml-3 is-light is-info is-small">Upload Existing Contract</button>
   </div>
 </template>
-
-<script setup></script>
-
-<style></style>

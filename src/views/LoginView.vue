@@ -65,9 +65,9 @@ const handleLogin = async () => {
                 <RouterLink to="/forgot-password">Forgot Password?</RouterLink>
               </div>
             </div>
-            <div class="has-text-danger has-text-centered pb-2" v-if="logInError">
+            <p class="has-text-danger has-text-centered pb-2" v-if="logInError">
               {{ logInError }}
-            </div>
+            </p>
             <div class="field">
               <button class="button is-fullwidth is-success" @click.prevent="handleLogin()">
                 Login with Email

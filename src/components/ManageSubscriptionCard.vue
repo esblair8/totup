@@ -5,7 +5,3 @@
     <button class="button is-small is-primary">Go to billing in stripe</button>
   </div>
 </template>
-
-<script></script>
-
-<style></style>

@@ -1,3 +1,20 @@
+<script setup>
+import { ref } from 'vue'
+import { storeToRefs } from 'pinia'
+import useUserInfoStore from '@/stores/userInfoStore'
+
+const userInfoStore = useUserInfoStore()
+const { userInfo } = storeToRefs(userInfoStore)
+const error = ref(null)
+const updateUserInformation = async () => {
+  try {
+    await userInfoStore.updateUserInfo()
+  } catch (error) {
+    error.value = error
+  }
+}
+</script>
+
 <template>
   <div class="column content is-three-quarters box p-5">
     <div class="form">
@@ -27,6 +44,10 @@
           <input class="input" type="email" placeholder="Town or City" v-model="userInfo.city" />
         </div>
       </div>
+      <p class="has-text-danger has-text-centered pb-2" v-if="error">
+        {{ logInError }}
+      </p>
+
       <div class="field is-grouped">
         <div class="control">
           <button class="button is-small is-link" @click="updateUserInformation()">
@@ -37,21 +58,3 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { storeToRefs } from 'pinia'
-import useUserInfoStore from '@/stores/userInfoStore'
-
-const userInfoStore = useUserInfoStore()
-const { userInfo } = storeToRefs(userInfoStore)
-
-const updateUserInformation = async () => {
-  try {
-    await userInfoStore.updateUserInfo()
-  } catch (error) {
-    console.log(error)
-  }
-}
-</script>
-
-<style></style>

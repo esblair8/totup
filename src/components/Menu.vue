@@ -1,3 +1,9 @@
+<script setup>
+import useShowMenuStore from '@/stores/showMenuStore'
+
+const showMenuStore = useShowMenuStore()
+</script>
+
 <template>
   <aside class="container menu column is-2 mx-2" v-if="showMenuStore.showMenu">
     <div class="menu-label">
@@ -32,12 +38,6 @@
     </ul>
   </aside>
 </template>
-
-<script setup>
-import useShowMenuStore from '@/stores/showMenuStore'
-
-const showMenuStore = useShowMenuStore()
-</script>
 
 <style scoped>
 .menu {

@@ -1,3 +1,4 @@
+
 <template>
   <div class="column content is-three-quarters box p-5">
     <h2>Current Plan</h2>
@@ -7,7 +8,3 @@
     <p>Other feature 3</p>
   </div>
 </template>
-
-<script></script>
-
-<style></style>

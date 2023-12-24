@@ -1,3 +1,43 @@
+<script setup>
+import { ref } from 'vue'
+import { RouterLink } from 'vue-router'
+import { useRouter } from 'vue-router'
+import { useMediaQuery } from '@vueuse/core'
+import { onClickOutside } from '@vueuse/core'
+import useAuthUser from '@/composables/UseAuthUser'
+import useShowMenuStore from '../stores/showMenuStore'
+
+const router = useRouter()
+const showMenuStore = useShowMenuStore()
+
+const { logout, isLoggedIn, loggedInUser } = useAuthUser()
+
+const isSmallScreen = useMediaQuery('(max-width: 1023px)')
+
+const handleLogout = async () => {
+  try {
+    await logout()
+    router.push('/login')
+  } catch (error) {
+    //do some error handling
+  }
+}
+
+const showMobileNav = ref(false)
+const navbarMenuRef = ref(null)
+const navbarBurgerRef = ref(null)
+
+onClickOutside(
+  navbarMenuRef,
+  () => {
+    showMobileNav.value = false
+  },
+  {
+    ignore: [navbarBurgerRef]
+  }
+)
+</script>
+
 <template>
   <nav class="navbar is-fixed-top is-transparent">
     <div class="navbar-brand">
@@ -94,46 +134,6 @@
     </div>
   </nav>
 </template>
-
-<script setup>
-import { ref } from 'vue'
-import { RouterLink } from 'vue-router'
-import { useRouter } from 'vue-router'
-import { useMediaQuery } from '@vueuse/core'
-import { onClickOutside } from '@vueuse/core'
-import useAuthUser from '@/composables/UseAuthUser'
-import useShowMenuStore from '../stores/showMenuStore'
-
-const router = useRouter()
-const showMenuStore = useShowMenuStore()
-
-const { logout, isLoggedIn, loggedInUser } = useAuthUser()
-
-const isSmallScreen = useMediaQuery('(max-width: 1023px)')
-
-const handleLogout = async () => {
-  try {
-    await logout()
-    router.push('/login')
-  } catch (error) {
-    //do some error handling
-  }
-}
-
-const showMobileNav = ref(false)
-const navbarMenuRef = ref(null)
-const navbarBurgerRef = ref(null)
-
-onClickOutside(
-  navbarMenuRef,
-  () => {
-    showMobileNav.value = false
-  },
-  {
-    ignore: [navbarBurgerRef]
-  }
-)
-</script>
 
 <style scoped>
 .inline {

@@ -1,3 +1,20 @@
+<script setup>
+import { defineProps, reactive } from 'vue'
+import useShowModalStore from '@/stores/showModalStore'
+
+const showModalStore = useShowModalStore()
+
+const form = reactive({
+  name: '',
+  rate: 0,
+  hours: 0,
+  paid: false,
+  status: 'draft'
+})
+
+const props = defineProps(['invoice'])
+</script>
+
 <template>
   <div class="modal" :class="{ 'is-active': showModalStore.showEditModal }">
     <div class="modal-background" @click="showModalStore.closeModal('editModal')"></div>
@@ -46,22 +63,5 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { defineProps, reactive } from 'vue'
-import useShowModalStore from '@/stores/showModalStore'
-
-const showModalStore = useShowModalStore()
-
-const form = reactive({
-  name: '',
-  rate: 0,
-  hours: 0,
-  paid: false,
-  status: 'draft'
-})
-
-const props = defineProps(['invoice'])
-</script>
 
 <style scoped></style>

@@ -11,7 +11,3 @@
     <button class="button ml-3 is-light is-info is-small">Complete Form Yourself</button>
   </div>
 </template>
-
-<script setup></script>
-
-<style></style>

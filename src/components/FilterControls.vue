@@ -1,3 +1,11 @@
+<script setup>
+import useInvoiceStore from '@/stores/invoiceStore'
+import { useMediaQuery } from '@vueuse/core'
+
+const isLargeScreen = useMediaQuery('(min-width: 1000px)')
+const invoiceStore = useInvoiceStore()
+</script>
+
 <template>
   <div class="field buttons" :class="{ 'is-centered': !isLargeScreen }">
     <input
@@ -35,14 +43,6 @@
     </button>
   </div>
 </template>
-
-<script setup>
-import useInvoiceStore from '@/stores/invoiceStore'
-import { useMediaQuery } from '@vueuse/core'
-
-const isLargeScreen = useMediaQuery('(min-width: 1000px)')
-const invoiceStore = useInvoiceStore()
-</script>
 
 <style scoped>
 .input {

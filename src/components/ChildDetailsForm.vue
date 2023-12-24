@@ -1,3 +1,20 @@
+<script setup>
+import { reactive } from 'vue'
+import useChildDetailsStore from '@/stores/childDetailsStore'
+
+const childDetailsStore = useChildDetailsStore()
+
+const daysSelected = reactive({
+  monday: false,
+  tuesday: false,
+  wednesday: false,
+  thursday: false,
+  friday: false,
+  saturday: false,
+  sunday: false
+})
+</script>
+
 <template>
   <h2 class="title is-xs">Child Details</h2>
 
@@ -193,22 +210,3 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { reactive } from 'vue'
-import useChildDetailsStore from '@/stores/childDetailsStore'
-
-const childDetailsStore = useChildDetailsStore()
-
-const daysSelected = reactive({
-  monday: false,
-  tuesday: false,
-  wednesday: false,
-  thursday: false,
-  friday: false,
-  saturday: false,
-  sunday: false
-})
-</script>
-
-<style></style>

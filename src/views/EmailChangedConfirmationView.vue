@@ -39,5 +39,3 @@ const queryParams = computed(() => {
     </div>
   </div>
 </template>
-
-<style></style>

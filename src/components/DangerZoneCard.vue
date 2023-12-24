@@ -1,3 +1,11 @@
+<script setup>
+import { ref } from 'vue'
+const showMessage = ref(false)
+const handleRemoveAccountAction = () => {
+  showMessage.value = true
+}
+</script>
+
 <template>
   <div class="column content is-three-quarters box p-5">
     <h2>Danger Zone</h2>
@@ -15,13 +23,3 @@
     </button>
   </div>
 </template>
-
-<script setup>
-import { ref } from 'vue'
-const showMessage = ref(false)
-const handleRemoveAccountAction = () => {
-  showMessage.value = true
-}
-</script>
-
-<style></style>

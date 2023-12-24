@@ -1,3 +1,27 @@
+<script setup>
+import { reactive } from 'vue'
+import { useMediaQuery } from '@vueuse/core'
+import ChildDetailsForm from './ChildDetailsForm.vue'
+import ContractForm from './ContractForm.vue'
+import OtherInformationForm from './OtherInformationForm.vue'
+import ReviewOnboardingInfo from './ReviewOnboardingInfo.vue'
+
+const isSmallScreen = useMediaQuery('(max-width: 508px)')
+
+const data = reactive({
+  currentStep: 1
+})
+function nextStep() {
+  data.currentStep++
+}
+function prevStep() {
+  data.currentStep--
+}
+function submitForm() {
+  // Handle form submission logic here
+}
+</script>
+
 <template>
   <nav
     class="breadcrumb has-arrow-separator"
@@ -49,30 +73,6 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { reactive } from 'vue'
-import { useMediaQuery } from '@vueuse/core'
-import ChildDetailsForm from './ChildDetailsForm.vue'
-import ContractForm from './ContractForm.vue'
-import OtherInformationForm from './OtherInformationForm.vue'
-import ReviewOnboardingInfo from './ReviewOnboardingInfo.vue'
-
-const isSmallScreen = useMediaQuery('(max-width: 508px)')
-
-const data = reactive({
-  currentStep: 1
-})
-function nextStep() {
-  data.currentStep++
-}
-function prevStep() {
-  data.currentStep--
-}
-function submitForm() {
-  // Handle form submission logic here
-}
-</script>
 
 <style>
 .step-form {

@@ -44,5 +44,3 @@ const handleResetPassword = async () => {
     </div>
   </div>
 </template>
-
-<style></style>

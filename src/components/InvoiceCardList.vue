@@ -1,3 +1,11 @@
+<script setup>
+import FilterControls from '@/components/FilterControls.vue'
+import useInvoiceStore from '@/stores/invoiceStore'
+
+const invoiceStore = useInvoiceStore()
+
+</script>
+
 <template>
   <div v-if="invoiceStore.filteredInvoices.length > 0">
     <FilterControls />
@@ -22,7 +30,7 @@
               <tr>
                 <td>Status</td>
                 <td>
-                  <span :class="getTagColor(invoice.status)" class="tag is-rounded">{{
+                  <span :class="useInvoiceStore.getTagColor(invoice.status)" class="tag is-rounded">{{
                     invoice.status
                   }}</span>
                 </td>
@@ -54,22 +62,3 @@
   </div>
 </template>
 
-<script setup>
-import FilterControls from '@/components/FilterControls.vue'
-import useInvoiceStore from '@/stores/invoiceStore'
-
-const invoiceStore = useInvoiceStore()
-
-const getTagColor = (status) => {
-  switch (status) {
-    case 'draft':
-      return 'is-warning'
-    case 'sent':
-      return 'is-info'
-    case 'unpaid':
-      return 'is-danger'
-    case 'paid':
-      return 'is-success'
-  }
-}
-</script>

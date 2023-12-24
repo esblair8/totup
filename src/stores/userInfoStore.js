@@ -9,10 +9,9 @@ const useUserInfoStore = defineStore('userInfoStore', {
   state: () => ({
     userInfo: {
       full_name: '',
-      address: '',
+      street: '',
       post_code: '',
       city: '',
-      name_on_account: '',
       account_number: '',
       sort_code: '',
       rate: 0.0,

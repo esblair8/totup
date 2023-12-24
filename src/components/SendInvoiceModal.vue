@@ -1,3 +1,14 @@
+<script setup>
+import { defineProps } from 'vue'
+import useShowModalStore from '@/stores/showModalStore'
+import useInvoiceStore from '@/stores/invoiceStore'
+
+const showModalStore = useShowModalStore()
+const invoiceStore = useInvoiceStore()
+
+const props = defineProps(['invoice'])
+</script>
+
 <template>
   <div class="modal" :class="{ 'is-active': showModalStore.showSendModal }">
     <div class="modal-background" @click="showModalStore.closeModal('sendModal')"></div>
@@ -21,16 +32,5 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { defineProps } from 'vue'
-import useShowModalStore from '@/stores/showModalStore'
-import useInvoiceStore from '@/stores/invoiceStore'
-
-const showModalStore = useShowModalStore()
-const invoiceStore = useInvoiceStore()
-
-const props = defineProps(['invoice'])
-</script>
 
 <style scoped></style>

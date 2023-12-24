@@ -22,8 +22,7 @@ export default function useAuthUser() {
     if (errors.nameError || errors.emailError || errors.passwordError) {
       throw new Error('Invalid credentials')
     }
-    console.log('valid credentials')
-
+    
     const { user, error } = await supabase.auth.signInWithPassword({
       email: userData.email,
       password: userData.password
@@ -76,12 +75,10 @@ export default function useAuthUser() {
   const register = async () => {
     validateCredentials(true)
     if (errors.emailError || errors.passwordError) {
-      console.log('valid credentials', email, password)
 
       throw new Error('Invalid username or password')
     }
     const { email, password } = userData
-    console.log('valid credentials', email, password)
 
     const { user, error } = await supabase.auth.signUp({
       email: email,
@@ -92,7 +89,6 @@ export default function useAuthUser() {
   }
 
   const updateEmail = async (newEmail) => {
-    console.log('updateEmail', newEmail)
     const { data, error } = await supabase.auth.updateUser({ email: newEmail })
     if (error) throw error
     return userData
@@ -108,7 +104,6 @@ export default function useAuthUser() {
   }
 
   const sendPasswordRestEmail = async (email) => {
-    console.log('sendPasswordRestEmail', email)
     const { user, error } = await supabase.auth.resetPasswordForEmail(email)
     if (error) throw error
     return user
@@ -122,7 +117,6 @@ export default function useAuthUser() {
 
   const validatePassword = (password) => {
     const result = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(password)
-    console.log('validatePassword', result)
     return result
   }
 

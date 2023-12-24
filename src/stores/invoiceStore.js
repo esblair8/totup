@@ -54,9 +54,33 @@ const useInvoiceStore = defineStore('invoiceStore', {
       } else {
         this.invoiceData = data
       }
+    },
+    async updateInvoice(invoice) {
+      let { invoiceData, invoiceError } = await supabase
+        .from('invoices')
+        .upsert(invoiceData)
+        .match({ id: invoice.id })
+        .select(`* , line_items(*)`)
+
+      if (invoiceError) {
+        this.invoiceErrorMessage = invoiceError.message
+      } else {
+        this.invoiceData = data
+      }
+
+      let { lineItemData, lineItemError } = await supabase
+        .from('line_items')
+        .upsert(lineItemData)
+        .match({ id: invoice.id })
+        .select(`* , line_items(*)`)
+
+      if (error) {
+        this.errorMessage = error.message
+      } else {
+        this.invoiceData = data
+      }
     }
   },
-
   methods: {
     getTagColor(status) {
       switch (status) {

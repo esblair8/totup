@@ -13,5 +13,3 @@ import CancelSubscriptionCard from '@/components/CancelSubscriptionCard.vue'
     <CancelSubscriptionCard />
   </div>
 </template>
-
-<style></style>

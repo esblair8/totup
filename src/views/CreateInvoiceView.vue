@@ -2,7 +2,7 @@
 import { ref, reactive, computed, onBeforeMount } from 'vue'
 import { storeToRefs } from 'pinia'
 import HeroTitle from '@/components/HeroTitle.vue'
-import useUserInfoStore from '../stores/userInfoStore'
+import useUserInfoStore from '@/stores/userInfoStore'
 import useAuthUser from '@/composables/UseAuthUser'
 
 const userInfoStore = useUserInfoStore()
@@ -30,7 +30,9 @@ const deleteImage = () => {
   imageUrl.value = null
 }
 
-const lineItems = ref([{ id: '', name: '', date: '', hours: null, rate: null, total: null }])
+const lineItems = ref([
+  { id: '', name: '', date: '', hours: null, rate: 0.00, total: null }
+])
 
 const getTotalForLineItems = computed(() => {
   return lineItems.value.reduce((acc, lineItem) => {
@@ -60,14 +62,11 @@ const removeLineItem = () => {
 }
 
 const initialInvoiceData = reactive({
-  invoiceNumber: '',
-  invoiceDate: '',
+  invoiceNumber: '', // max invoice nubmer from DB
+  invoiceDate: '', // current date or dat on invoice from db
   customerName: '',
   customerEmailAddress: '',
   customerAddress: '',
-  companyName: '', //pull from users table
-  companyAddress: userInfoStore.street, //pull from users table
-  companyEmailAddress: '', //pull from users table
   terms: '',
   notes: ''
 })
@@ -78,6 +77,8 @@ const saveInvoiceToDb = () => {}
 <template>
   <div class="container content m-4">
     <HeroTitle title="Create Invoice" />
+    {{ userInfo }}
+
     <div class="invoice" v-if="loggedInUser">
       <div class="invoice-header columns is-vcentered">
         <div v-if="imageUrl" class="column image-selector is-2">
@@ -126,9 +127,9 @@ const saveInvoiceToDb = () => {}
         <div class="bill-from column is-half has-text-right">
           <h2 class="is-size-5">Bill From</h2>
           <input class="input is-clickable is-small" v-model="userInfo.full_name" />
-          <input class="input is-clickable is-small" v-model="userInfo.address" />
+          <input class="input is-clickable is-small" v-model="userInfo.street" />
           <input class="input is-clickable is-small" v-model="userInfo.post_code" />
-          <input class="input is-clickable is-small" v-model="userInfo.country" />
+          <input class="input is-clickable is-small" v-model="userInfo.city" />
           <input class="input is-clickable is-small" v-model="loggedInUser.email" />
         </div>
       </div>

@@ -1,3 +1,11 @@
+<script setup>
+import { storeToRefs } from 'pinia'
+import useUserInfoStore from '@/stores/userInfoStore'
+const userInfoStore = useUserInfoStore()
+
+const { userInfo } = storeToRefs(userInfoStore)
+</script>
+
 <template>
   <div class="column content is-three-quarters box p-5">
     <div class="form">
@@ -38,12 +46,3 @@
   </div>
 </template>
 
-<script setup>
-import { storeToRefs } from 'pinia'
-import useUserInfoStore from '@/stores/userInfoStore'
-const userInfoStore = useUserInfoStore()
-
-const { userInfo } = storeToRefs(userInfoStore)
-</script>
-
-<style></style>

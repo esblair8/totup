@@ -1,3 +1,37 @@
+<script setup>
+import { ref } from 'vue'
+import useAuthUser from '@/composables/UseAuthUser'
+
+const { loggedInUser, updateEmail, sendPasswordRestEmail } = useAuthUser()
+
+const passwordResetSent = ref(false)
+const sendPasswordRestEmailError = ref('')
+const updateEmailError = ref('')
+const updateEmailSuccess = ref(false)
+const password = ref('')
+
+const handleResetPassword = async () => {
+  try {
+    await sendPasswordRestEmail(loggedInUser.value.email)
+    passwordResetSent.value = true
+  } catch (error) {
+    passwordResetSent.value = false
+    sendPasswordRestEmailError.value = error.message
+  }
+}
+const handleChangeEmail = async () => {
+  updateEmailSuccess.value = false
+  updateEmailError.value = ''
+  try {
+    await updateEmail(loggedInUser.value.email)
+    updateEmailSuccess.value = true
+  } catch (error) {
+    updateEmailSuccess.value = false
+    updateEmailError.value = error.message
+  }
+}
+</script>
+
 <template>
   <div class="column content is-three-quarters box p-5" v-if="!!loggedInUser">
     <h2>Connected Accounts</h2>
@@ -41,39 +75,3 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { ref } from 'vue'
-import useAuthUser from '@/composables/UseAuthUser'
-
-const { loggedInUser, updateEmail, sendPasswordRestEmail } = useAuthUser()
-
-const passwordResetSent = ref(false)
-const sendPasswordRestEmailError = ref('')
-const updateEmailError = ref('')
-const updateEmailSuccess = ref(false)
-const password = ref('')
-
-const handleResetPassword = async () => {
-  try {
-    await sendPasswordRestEmail(loggedInUser.value.email)
-    passwordResetSent.value = true
-  } catch (error) {
-    passwordResetSent.value = false
-    sendPasswordRestEmailError.value = error.message
-  }
-}
-const handleChangeEmail = async () => {
-  updateEmailSuccess.value = false
-  updateEmailError.value = ''
-  try {
-    await updateEmail(loggedInUser.value.email)
-    updateEmailSuccess.value = true
-  } catch (error) {
-    updateEmailSuccess.value = false
-    updateEmailError.value = error.message
-  }
-}
-</script>
-
-<style></style>

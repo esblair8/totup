@@ -1,3 +1,25 @@
+<script setup>
+import { ref } from 'vue'
+import DOMPurify from 'dompurify'
+
+const subject = ref('')
+const message = ref('')
+const submitted = ref(false)
+
+const submitForm = () => {
+  const sanitizedSubject = DOMPurify.sanitize(subject.value)
+  const sanitizedMessage = DOMPurify.sanitize(message.value)
+
+  const data = {
+    subject: sanitizedSubject,
+    message: sanitizedMessage
+  }
+
+  submitted.value = true
+  //send to backend
+}
+</script>
+
 <template>
   <div class="hero-body">
     <div class="container mt-6">
@@ -52,28 +74,6 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { ref } from 'vue'
-import DOMPurify from 'dompurify'
-
-const subject = ref('')
-const message = ref('')
-const submitted = ref(false)
-
-const submitForm = () => {
-  const sanitizedSubject = DOMPurify.sanitize(subject.value)
-  const sanitizedMessage = DOMPurify.sanitize(message.value)
-
-  const data = {
-    subject: sanitizedSubject,
-    message: sanitizedMessage
-  }
-
-  submitted.value = true
-  //send to backend
-}
-</script>
 
 <style>
 .contact-us {

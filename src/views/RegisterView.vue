@@ -19,7 +19,6 @@ const handleSubmit = async () => {
   registerError.value = null
   errors.value = null
 
-  console.log('handleSubmit -> REGISTER')
   try {
     await register()
     router.push({ name: 'complete-registration' })
