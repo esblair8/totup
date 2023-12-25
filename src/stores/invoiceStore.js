@@ -34,18 +34,6 @@ const useInvoiceStore = defineStore('invoiceStore', {
       return (id) => {
         return state.invoiceData.filter((invoice) => invoice.id === id)[0]
       }
-    },
-    getTagColor: (status) => {
-      switch (status) {
-        case 'draft':
-          return 'is-warning'
-        case 'sent':
-          return 'is-info'
-        case 'unpaid':
-          return 'is-danger'
-        case 'paid':
-          return 'is-success'
-      }
     }
   },
   actions: {

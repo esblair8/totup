@@ -20,6 +20,20 @@ const showModalWithSelectedInvoice = (modalName, invoiceId) => {
   showModalStore.openModal(modalName)
   invoiceStore.selectedInvoiceId = invoiceId
 }
+
+const getTagColor = status => {
+      switch (status) {
+        case 'draft':
+          return 'is-warning'
+        case 'sent':
+          return 'is-info'
+        case 'unpaid':
+          return 'is-danger'
+        case 'paid':
+          return 'is-success'
+      }
+    }
+
 </script>
 
 <template>
@@ -39,7 +53,7 @@ const showModalWithSelectedInvoice = (modalName, invoiceId) => {
             <td class="has-text-centered">£{{ invoice.hours }}</td>
             <td class="has-text-centered">£{{ invoice.total }}</td>
             <td class="has-text-centered">
-              <span :class="invoiceStore.getTagColor(invoice.status)" class="tag is-rounded">{{
+              <span :class="getTagColor(invoice.status)" class="tag is-rounded">{{
                 invoice.status
               }}</span>
             </td>
