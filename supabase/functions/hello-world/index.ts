@@ -9,7 +9,7 @@ console.log("Hello from Functions!")
 serve(async (req) => {
   const { name } = await req.json()
   const data = {
-    message: `Good bye ${name}!`,
+    message: `Hello ${name}!`,
   }
 
   return new Response(
