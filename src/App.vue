@@ -14,7 +14,9 @@ const isLargeScreen = useMediaQuery('(min-width: 769px)')
 
   <div class="columns is-centered full-height top">
     <Menu v-if="route.meta.requiresAuth && isLargeScreen" />
-    <RouterView />
+    <div class="view">
+      <RouterView />
+    </div>
   </div>
 </template>
 
@@ -25,5 +27,11 @@ const isLargeScreen = useMediaQuery('(min-width: 769px)')
   margin-top: 4rem;
   margin-left: 1rem;
   margin-right: 1rem;
+}
+
+.view {
+  width: 100%;
+  height: 100vh;
+  overflow: auto;
 }
 </style>

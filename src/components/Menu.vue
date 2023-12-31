@@ -42,5 +42,6 @@ const showMenuStore = useShowMenuStore()
 <style scoped>
 .menu {
   border-right: 1px solid lightgrey;
+  height: 100%
 }
 </style>
