@@ -20,10 +20,10 @@ const showMenuStore = useShowMenuStore()
     <p class="menu-label">Get Help</p>
     <ul class="menu-list">
       <li>
-        <RouterLink to="/contact" class="navbar-item">Contact Us</RouterLink>
+        <RouterLink to="/help" class="navbar-item">Help Center</RouterLink>
       </li>
       <li>
-        <RouterLink to="/help" class="navbar-item">Help Center</RouterLink>
+        <RouterLink to="/contact" class="navbar-item">Contact Us</RouterLink>
       </li>
     </ul>
     <p class="menu-label">Admin</p>
@@ -41,7 +41,6 @@ const showMenuStore = useShowMenuStore()
 
 <style scoped>
 .menu {
-  border-right: 1px solid lightgrey;
-  height: 100%
+  height: 100vh;
 }
 </style>

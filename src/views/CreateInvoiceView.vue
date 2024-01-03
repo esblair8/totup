@@ -31,7 +31,7 @@ const deleteImage = () => {
 }
 
 const lineItems = ref([
-  { id: '', name: '', date: '', hours: null, rate: 0.00, total: null }
+  { id: '', name: '', startDate: '', endDate: '', hours: null, rate: 0.00, total: null }
 ])
 
 const getTotalForLineItems = computed(() => {
@@ -77,7 +77,6 @@ const saveInvoiceToDb = () => {}
 <template>
   <div class="container content m-4">
     <HeroTitle title="Create Invoice" />
-    {{ userInfo }}
 
     <div class="invoice" v-if="loggedInUser">
       <div class="invoice-header columns is-vcentered">
@@ -138,7 +137,8 @@ const saveInvoiceToDb = () => {}
         <thead>
           <tr>
             <th>Child</th>
-            <th>Date</th>
+            <th>Start Date</th>
+            <th>End Date</th>
             <th>Hours</th>
             <th>Rate</th>
             <th>Total</th>
@@ -150,9 +150,12 @@ const saveInvoiceToDb = () => {}
               <input class="input is-clickable" v-model="item.name" />
             </td>
             <td>
-              <input class="input is-clickable" v-model="item.date" />
+              <input class="input is-clickable" v-model="item.startDate" />
             </td>
             <td>
+              <input class="input is-clickable" v-model="item.endDate" />
+            </td>
+              <td>
               <input class="input is-clickable" v-model="item.hours" />
             </td>
             <td>

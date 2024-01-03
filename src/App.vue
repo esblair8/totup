@@ -3,6 +3,9 @@ import { RouterView, useRoute } from 'vue-router'
 import NavBar from '@/components/NavBar.vue'
 import Menu from '@/components/Menu.vue'
 import { useMediaQuery } from '@vueuse/core'
+import useShowMenuStore from '@/stores/showMenuStore'
+
+const showMenuStore = useShowMenuStore()
 
 const route = useRoute()
 
@@ -14,7 +17,8 @@ const isLargeScreen = useMediaQuery('(min-width: 769px)')
 
   <div class="columns is-centered full-height top">
     <Menu v-if="route.meta.requiresAuth && isLargeScreen" />
-    <div class="view">
+   
+    <div class="view" :class="{ 'left-border': showMenuStore.showMenu & isLargeScreen }">
       <RouterView />
     </div>
   </div>
@@ -31,7 +35,9 @@ const isLargeScreen = useMediaQuery('(min-width: 769px)')
 
 .view {
   width: 100%;
-  height: 100vh;
-  overflow: auto;
+}
+
+.left-border {
+  border-left: 1px solid lightgrey;
 }
 </style>
