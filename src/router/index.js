@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import useAuthUser from '@/composables/UseAuthUser'
+import useSupabase from '../composables/UseSupabase'
 
+const { supabase } = useSupabase()
 const { isLoggedIn } = useAuthUser()
 
 const router = createRouter({
@@ -85,17 +87,22 @@ const router = createRouter({
       component: () => import('../views/NotFound.vue')
     }
   ]
-}
-)
+})
 
-// add route gaurds here to check if user is logged in
-// router.beforeEach(async (to, from, next) => {
-//   const requiresAuth = to.meta.requiresAuth
-//   if (requiresAuth && !isLoggedIn()) {
-//     next('/login')
-//   } else {
-//     next()
-//   } ``
-// })
+router.beforeEach(async (to, from, next) => {
+  const routeRequiresAuth = to.meta.requiresAuth
+
+  const { data, error } = await supabase.auth.getSession()
+
+  if (!error) {
+    console.log('checking session')
+    console.log(routeRequiresAuth, !data.session)
+    if (routeRequiresAuth && !data.session) {
+      next('/login')
+    } else {
+      next()
+    }
+  }
+})
 
 export default router

@@ -8,6 +8,7 @@ const supabaseKey =
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 supabase.auth.onAuthStateChange((event, session) => {
+  console.log('event', event, 'session', session)
   const { loggedInUser } = useAuthUser()
   loggedInUser.value = session?.user || null
 })
