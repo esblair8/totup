@@ -21,13 +21,15 @@ const submitForm = () => {
 </script>
 
 <template>
-  <div class="hero-body">
-    <div class="container mt-6">
+  <div class="pl-4">
+    <div class="content mt-6">
       <div class="columns is-centered">
-        <div class="column is-4-desktop is-4-widescreen box">
+        <div class="column is-6-widescreen">
           <h1 class="title is-1">Contact Us</h1>
           <div class="contact-us">
             <div v-if="!submitted">
+              <p>Submit your query below and we will get back to you as soon as possible.</p>
+              <p>We aim to reply within 24 hours.</p>
               <form>
                 <div class="field">
                   <label class="label">Subject</label>
@@ -64,9 +66,14 @@ const submitForm = () => {
                 Thanks for getting in contact. A member of our team will get back to you as soon as
                 possible.
               </p>
-              <button class="button is-primary mt-5" @click="$router.push('/')" type="submit">
+              <button class="button is-primary mt-5" @click="$router.go(-1)" type="submit">
+                Go Back
+              </button>
+              <button class="button is-info mt-5 ml-5" @click="$router.push('/')" type="submit">
                 Go Home
               </button>
+              
+
             </div>
           </div>
         </div>
@@ -77,7 +84,6 @@ const submitForm = () => {
 
 <style>
 .contact-us {
-  max-width: 500px;
   margin: 0 auto;
 }
 

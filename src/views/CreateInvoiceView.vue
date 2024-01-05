@@ -31,7 +31,7 @@ const deleteImage = () => {
 }
 
 const lineItems = ref([
-  { id: '', name: '', startDate: '', endDate: '', hours: null, rate: 0.00, total: null }
+  { id: '', name: '', startDate: '', endDate: '', hours: null, rate: 0.0, total: null }
 ])
 
 const getTotalForLineItems = computed(() => {
@@ -82,7 +82,7 @@ const saveInvoiceToDb = () => {}
       <div class="invoice-header columns is-vcentered">
         <div v-if="imageUrl" class="column image-selector is-2">
           <span class="delete-icon is-clickable" @click="deleteImage">
-            <font-awesome-icon
+            <font-awesome-icno
               class="mx-2 is-clickable"
               icon="xmark-circle"
               title="Preview Invoice"
@@ -155,7 +155,7 @@ const saveInvoiceToDb = () => {}
             <td>
               <input class="input is-clickable" v-model="item.endDate" />
             </td>
-              <td>
+            <td>
               <input class="input is-clickable" v-model="item.hours" />
             </td>
             <td>

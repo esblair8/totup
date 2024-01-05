@@ -16,8 +16,8 @@ const isLargeScreen = useMediaQuery('(min-width: 769px)')
   <NavBar v-if="route.meta.requiresAuth" />
 
   <div class="columns is-centered full-height top">
-    <Menu v-if="route.meta.requiresAuth && isLargeScreen" />
-   
+    <Menu v-if="route.meta.requiresAuth && isLargeScreen"></Menu>
+
     <div class="view" :class="{ 'left-border': showMenuStore.showMenu & isLargeScreen }">
       <RouterView />
     </div>

@@ -76,6 +76,7 @@ const router = createRouter({
     {
       path: '/contact',
       name: 'contact',
+      meta: { requiresAuth: true },
       component: () => import('../views/ContactUsView.vue')
     },
     {
@@ -84,7 +85,8 @@ const router = createRouter({
       component: () => import('../views/NotFound.vue')
     }
   ]
-})
+}
+)
 
 // add route gaurds here to check if user is logged in
 // router.beforeEach(async (to, from, next) => {

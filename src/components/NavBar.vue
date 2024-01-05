@@ -2,8 +2,7 @@
 import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useRouter } from 'vue-router'
-import { useMediaQuery } from '@vueuse/core'
-import { onClickOutside } from '@vueuse/core'
+import { useMediaQuery, onClickOutside } from '@vueuse/core'
 import useAuthUser from '@/composables/UseAuthUser'
 import useShowMenuStore from '../stores/showMenuStore'
 
@@ -90,7 +89,20 @@ onClickOutside(
           to="/invoices"
           >All Invoices
         </RouterLink>
-
+        <RouterLink
+          @click.prevent="showMobileNav = !showMobileNav"
+          v-if="isSmallScreen"
+          to="/subscription"
+          class="navbar-item"
+          >Subscription</RouterLink
+        >
+        <RouterLink
+          @click.prevent="showMobileNav = !showMobileNav"
+          v-if="isSmallScreen"
+          to="/help"
+          class="navbar-item"
+          >Help Center</RouterLink
+        >
         <RouterLink
           @click.prevent="showMobileNav = !showMobileNav"
           v-if="isSmallScreen"
@@ -101,10 +113,11 @@ onClickOutside(
         <RouterLink
           @click.prevent="showMobileNav = !showMobileNav"
           v-if="isSmallScreen"
-          to="/subscription"
+          to="/contact"
           class="navbar-item"
-          >Subscription</RouterLink
+          >Contact Us</RouterLink
         >
+
         <a href="" v-if="isSmallScreen" class="navbar-item">Logout</a>
       </div>
 
