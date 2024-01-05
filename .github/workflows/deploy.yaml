@@ -1,24 +1,22 @@
 name: Deploy Function
-
 on:
   push:
     branches:
       - main
   workflow_dispatch:
-
 jobs:
   deploy:
+    on:
+      push:
+        paths:
+          - supabase/functions/**
     runs-on: ubuntu-latest
-
     env:
       SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
       PROJECT_ID: oitfkhbgghwykbfmvfyd
-
     steps:
       - uses: actions/checkout@v3
-
       - uses: supabase/setup-cli@v1
         with:
           version: latest
-
       - run: supabase functions deploy --project-ref $PROJECT_ID --debug --no-verify-jwt
