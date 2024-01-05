@@ -3,7 +3,6 @@ import useAuthUser from '@/composables/UseAuthUser'
 import useSupabase from '../composables/UseSupabase'
 
 const { supabase } = useSupabase()
-const { isLoggedIn } = useAuthUser()
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -95,8 +94,6 @@ router.beforeEach(async (to, from, next) => {
   const { data, error } = await supabase.auth.getSession()
 
   if (!error) {
-    console.log('checking session')
-    console.log(routeRequiresAuth, !data.session)
     if (routeRequiresAuth && !data.session) {
       next('/login')
     } else {
