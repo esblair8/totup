@@ -45,4 +45,3 @@ const { userInfo } = storeToRefs(userInfoStore)
     </div>
   </div>
 </template>
-
