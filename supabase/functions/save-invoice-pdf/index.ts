@@ -8,12 +8,8 @@ const supabaseKey =
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 Deno.serve(async (req) => {
-  const request = await req.text()
-  console.log('request', request)
 
-  const fileName = 'invoice.pdf'
-
-  const { data, error } = await supabase.storage.from('invoices').upload(fileName, request, {
+  const { data, error } = await supabase.storage.from('invoices').upload('invoice-2.pdf', 'Hello World', {
     cacheControl: '3600',
     contentType: 'application/pdf',
     upsert: true
