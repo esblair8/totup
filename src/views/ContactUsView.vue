@@ -1,6 +1,9 @@
 <script setup>
 import { ref } from 'vue'
 import DOMPurify from 'dompurify'
+import { useMediaQuery } from '@vueuse/core'
+
+const isLargeScreen = useMediaQuery('(min-width: 769px)')
 
 const subject = ref('')
 const message = ref('')
@@ -15,13 +18,13 @@ const submitForm = () => {
     message: sanitizedMessage
   }
 
-  submitted.value = true
+  submitted.value = true1
   //send to backend
 }
 </script>
 
 <template>
-  <div class="pl-4">
+  <div :class="{ 'pl-4' : isLargeScreen }" class="pl-1">
     <div class="content mt-6">
       <div class="columns is-centered">
         <div class="column is-6-widescreen">
@@ -72,8 +75,6 @@ const submitForm = () => {
               <button class="button is-info mt-5 ml-5" @click="$router.push('/')" type="submit">
                 Go Home
               </button>
-              
-
             </div>
           </div>
         </div>
