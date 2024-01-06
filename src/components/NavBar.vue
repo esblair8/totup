@@ -19,6 +19,7 @@ const handleLogout = async () => {
     router.push('/login')
   } catch (error) {
     //do some error handling
+    console.log(error)
   }
 }
 
@@ -79,7 +80,7 @@ onClickOutside(
           v-if="isSmallScreen"
           @click.prevent="showMobileNav = !showMobileNav"
           class="navbar-item"
-          to="/"
+          to="/new-invoice"
           >Create Invoice
         </RouterLink>
         <RouterLink
@@ -117,8 +118,9 @@ onClickOutside(
           class="navbar-item"
           >Contact Us</RouterLink
         >
-
-        <a href="" v-if="isSmallScreen" class="navbar-item">Logout</a>
+        <RouterLink v-if="isSmallScreen" @click="handleLogout()" to="/login" class="navbar-item"
+          >Logout</RouterLink
+        >
       </div>
 
       <div class="navbar-end">
@@ -135,9 +137,12 @@ onClickOutside(
               <div class="dropdown-item">{{ loggedInUser.email }}</div>
               <RouterLink to="/settings" class="dropdown-item">Settings</RouterLink>
               <RouterLink to="/subscription" class="dropdown-item">Subscription</RouterLink>
+              <RouterLink to="/help" class="dropdown-item">Help Center</RouterLink>
               <RouterLink to="/contact" class="dropdown-item">Contact Us</RouterLink>
               <hr class="dropdown-divider" />
-              <a @click="handleLogout" class="dropdown-item">Log out</a>
+              <RouterLink @click="handleLogout()" to="/login" class="dropdown-item"
+                >Logout</RouterLink
+              >
             </div>
           </div>
         </div>

@@ -1,7 +1,21 @@
 <script setup>
+import useAuthUser from '@/composables/UseAuthUser'
 import useShowMenuStore from '@/stores/showMenuStore'
+import { useRouter } from 'vue-router'
 
 const showMenuStore = useShowMenuStore()
+const router = useRouter()
+const { logout } = useAuthUser()
+
+const handleLogout = async () => {
+  try {
+    await logout()
+    router.push('/login')
+  } catch (error) {
+    //do some error handling
+    console.log('111error', error)
+  }
+}
 </script>
 
 <template>
@@ -34,7 +48,9 @@ const showMenuStore = useShowMenuStore()
       <li>
         <RouterLink to="/subscription" class="navbar-item">Subscription</RouterLink>
       </li>
-      <li><a>Logout</a></li>
+      <li>
+        <RouterLink @click="handleLogout()" to="/login" class="navbar-item">Logout</RouterLink>
+      </li>
     </ul>
   </aside>
 </template>
