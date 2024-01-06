@@ -4,17 +4,25 @@ import { storeToRefs } from 'pinia'
 import HeroTitle from '@/components/HeroTitle.vue'
 import useUserInfoStore from '@/stores/userInfoStore'
 import useAuthUser from '@/composables/UseAuthUser'
+import useInvoicePDFGenerator from '@/composables/UseInvoicePDFGenerator'
 
 const userInfoStore = useUserInfoStore()
 const { userInfo } = storeToRefs(userInfoStore)
 
 const { loggedInUser } = useAuthUser()
+const { generatePDFInvoice } = useInvoicePDFGenerator()
 
 onBeforeMount(async () => {
   await userInfoStore.fetchUserInfo()
 })
 const imageUrl = ref(null)
 
+const createInvoice = () => {
+  console.log('creatig invoice')
+
+  generatePDFInvoice()
+  console.log('invoice created')
+}
 const handleFileChange = (event) => {
   const file = event.target.files[0]
   const reader = new FileReader()
@@ -82,7 +90,7 @@ const saveInvoiceToDb = () => {}
       <div class="invoice-header columns is-vcentered">
         <div v-if="imageUrl" class="column image-selector is-2">
           <span class="delete-icon is-clickable" @click="deleteImage">
-            <font-awesome-icno
+            <font-awesome-icon
               class="mx-2 is-clickable"
               icon="xmark-circle"
               title="Preview Invoice"
@@ -200,7 +208,7 @@ const saveInvoiceToDb = () => {}
       <div class="button-section">
         <div class="is-grouped">
           <div class="control">
-            <button class="button is-small mr-5 is-link">Save Invoice</button>
+            <button class="button is-small mr-5 is-link" @click="createInvoice()">Save Invoice</button>
             <button class="button is-small is-primary">Send Invoice</button>
           </div>
         </div>
