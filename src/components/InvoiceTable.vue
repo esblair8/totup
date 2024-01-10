@@ -38,7 +38,7 @@ const getTagColor = status => {
 
 <template>
   <section class="content">
-    <div v-if="invoiceStore.filteredInvoices.length > 0">
+    <div v-if="invoiceStore.invoiceData.length > 0">
       <FilterControls />
       <table class="table mt-4 is-hoverable is-fullwidth">
         <thead>

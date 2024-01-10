@@ -20,7 +20,7 @@ const getTagColor = status => {
 </script>
 
 <template>
-  <div v-if="invoiceStore.filteredInvoices.length > 0">
+  <div v-if="invoiceStore.invoiceData.length > 0">
     <FilterControls />
     <div v-for="invoice in invoiceStore.filteredInvoices" class="card m-4">
       <div class="card-content">
