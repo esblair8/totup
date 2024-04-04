@@ -87,19 +87,19 @@ const router = createRouter({
   ]
 })
 
-router.beforeEach(async (to, from, next) => {
-  const routeRequiresAuth = to.meta.requiresAuth
+// router.beforeEach(async (to, from, next) => {
+//   const routeRequiresAuth = to.meta.requiresAuth
 
-  //gets session from local storage
-  const { data, error } = await supabase.auth.getSession()
+//   //gets session from local storage
+//   const { data, error } = await supabase.auth.getSession()
 
-  if (!error) {
-    if (routeRequiresAuth && !data.session) {
-      next('/login')
-    } else {
-      next()
-    }
-  }
-})
+//   if (!error) {
+//     if (routeRequiresAuth && !data.session) {
+//       next('/login')
+//     } else {
+//       next()
+//     }
+//   }
+// })
 
 export default router

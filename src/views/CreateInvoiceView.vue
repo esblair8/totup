@@ -145,8 +145,7 @@ const saveInvoiceToDb = () => {}
         <thead>
           <tr>
             <th>Child</th>
-            <th>Start Date</th>
-            <th>End Date</th>
+            <th>Date</th>
             <th>Hours</th>
             <th>Rate</th>
             <th>Total</th>
@@ -158,10 +157,7 @@ const saveInvoiceToDb = () => {}
               <input class="input is-clickable" v-model="item.name" />
             </td>
             <td>
-              <input class="input is-clickable" v-model="item.startDate" />
-            </td>
-            <td>
-              <input class="input is-clickable" v-model="item.endDate" />
+              <input class="input is-clickable" v-model="item.date" />
             </td>
             <td>
               <input class="input is-clickable" v-model="item.hours" />
@@ -171,6 +167,7 @@ const saveInvoiceToDb = () => {}
             </td>
             <td>{{ recalculateTotal(index) }}</td>
           </tr>
+          <tr></tr>
         </tbody>
       </table>
 

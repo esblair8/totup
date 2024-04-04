@@ -13,19 +13,19 @@ const handleLogout = async () => {
     router.push('/login')
   } catch (error) {
     //do some error handling
-    console.log('111error', error)
+    console.log('error', error)
   }
 }
 </script>
 
 <template>
-  <aside class="container menu column is-2 mx-2" v-if="showMenuStore.showMenu">
-    <div class="menu-label">
-      <p>Navigation</p>
+  <aside class="container menu column is-2 ml-2" v-if="showMenuStore.showMenu">
+    <div class="menu-label is-danger">
+      <p class="r">Navigation</p>
     </div>
-    <ul class="menu-list">
+    <ul class="menu-list $menu-item-color">
       <li>
-        <RouterLink class="navbar-item" to="/new-invoice">Create new Invoice </RouterLink>
+        <RouterLink class="navbar-item t" to="/new-invoice">Create new Invoice </RouterLink>
       </li>
       <li>
         <RouterLink class="navbar-item" to="/invoices"> All Invoices </RouterLink>
@@ -55,8 +55,11 @@ const handleLogout = async () => {
   </aside>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .menu {
+  color: white;
   height: 100vh;
+  width: 100%; 
 }
+
 </style>
