@@ -130,7 +130,8 @@ const saveAll = async () => {
                 We will store your bank details securely and will only use them to prepopulate your
                 invoice. You can change them at any time in the settings section.
               </p>
-
+              <p>Feel free to skip this section of you are evaluating the tool</p>
+              <br>
               <div class="field">
                 <label class="label">Sort Code</label>
                 <div class="control">
