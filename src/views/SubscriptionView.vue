@@ -7,7 +7,7 @@ import CancelSubscriptionCard from '@/components/CancelSubscriptionCard.vue'
 
 <template>
   <div class="container m-4">
-    <HeroTitle title="Subscription Details" />
+    <HeroTitle title="Subscription Details (WIP)" />
     <CurrentPlanCard />
     <ManageSubscriptionCard />
     <CancelSubscriptionCard />
