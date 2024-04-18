@@ -90,7 +90,7 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
   const routeRequiresAuth = to.meta.requiresAuth
 
-  //gets session from local storage
+  //gets a session from local storage
   const { data, error } = await supabase.auth.getSession()
 
   if (!error) {
