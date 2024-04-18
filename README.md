@@ -1,6 +1,12 @@
 # totup
 
-This template should help get you started developing with Vue 3 in Vite.
+Vuejs front end for totup, and invoicing tool for automated invoicing for independant childcare professionals
+
+app.totup.io
+
+Uses SUpavase as a Baas, providing postgres database, authentication and a rest api/graphql layer.
+
+Deployed to Netlify via Github actions
 
 ## Recommended IDE Setup
 
