@@ -2,7 +2,7 @@
 
 Vuejs front end for totup, and invoicing tool for automated invoicing for independant childcare professionals
 
-app.totup.io
+(app.totup.io)[app.totup.io]
 
 Uses SUpavase as a Baas, providing postgres database, authentication and a rest api/graphql layer.
 
